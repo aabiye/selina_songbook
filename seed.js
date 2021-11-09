@@ -7,7 +7,7 @@ const {User, Item} = require('./models');
 
 const createUsers = async () => {
     const users = [
-        {name : 'Dan', password: '1234'},
+        {name : 'James', password: '1234'},
         {name : 'Linda', password : 'password'}
     ];
 

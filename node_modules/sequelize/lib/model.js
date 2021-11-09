@@ -528,7 +528,7 @@ class Model {
 
       if (include.subQuery !== false && options.hasDuplicating && options.topLimit) {
         if (include.duplicating) {
-          include.subQuery = false;
+          include.subQuery = include.subQuery || false;
           include.subQueryFilter = include.hasRequired;
         } else {
           include.subQuery = include.hasRequired;
@@ -538,7 +538,6 @@ class Model {
         include.subQuery = include.subQuery || false;
         if (include.duplicating) {
           include.subQueryFilter = include.subQuery;
-          include.subQuery = false;
         } else {
           include.subQueryFilter = false;
           include.subQuery = include.subQuery || include.hasParentRequired && include.hasRequired && !include.separate;
@@ -2034,7 +2033,18 @@ class Model {
     options.offset = null;
     options.order = null;
 
-    return await this.aggregate(col, 'count', options);
+    const result = await this.aggregate(col, 'count', options);
+
+    // When grouping is used, some dialects such as PG are returning the count as string
+    // --> Manually convert it to number
+    if (Array.isArray(result)) {
+      return result.map(item => ({
+        ...item,
+        count: Number(item.count)
+      }));
+    }
+
+    return result;
   }
 
   /**
@@ -2069,7 +2079,7 @@ class Model {
    * @see
    * {@link Model.count} for a specification of count options
    *
-   * @returns {Promise<{count: number, rows: Model[]}>}
+   * @returns {Promise<{count: number | number[], rows: Model[]}>}
    */
   static async findAndCountAll(options) {
     if (options !== undefined && !_.isPlainObject(options)) {
@@ -2366,7 +2376,7 @@ class Model {
   }
 
   /**
-   * A more performant findOrCreate that will not work under a transaction (at least not in postgres)
+   * A more performant findOrCreate that may not work under a transaction (working in postgres)
    * Will execute a find call, if empty then attempt to create, if unique constraint then attempt to find again
    *
    * @see
@@ -2395,10 +2405,20 @@ class Model {
     if (found) return [found, false];
 
     try {
-      const created = await this.create(values, options);
+      const createOptions = { ...options };
+
+      // To avoid breaking a postgres transaction, run the create with `ignoreDuplicates`.
+      if (this.sequelize.options.dialect === 'postgres' && options.transaction) {
+        createOptions.ignoreDuplicates = true;
+      }
+
+      const created = await this.create(values, createOptions);
       return [created, true];
     } catch (err) {
-      if (!(err instanceof sequelizeErrors.UniqueConstraintError)) throw err;
+      if (!(err instanceof sequelizeErrors.UniqueConstraintError || err instanceof sequelizeErrors.EmptyResultError)) {
+        throw err;
+      }
+
       const foundAgain = await this.findOne(options);
       return [foundAgain, false];
     }
@@ -2427,7 +2447,7 @@ class Model {
    * @param  {boolean}      [options.benchmark=false]                     Pass query execution time in milliseconds as second argument to logging function (options.logging).
    * @param  {string}       [options.searchPath=DEFAULT]                  An optional parameter to specify the schema search_path (Postgres only)
    *
-   * @returns {Promise<[Model, boolean | null]>} returns an array with two elements, the first being the new record and the second being `true` if it was just created or `false` if it already existed (except on Postgres and SQLite, which can't detect this and will always return `null` instead of a boolean).
+   * @returns {Promise<Array<Model, boolean | null>>} returns an array with two elements, the first being the new record and the second being `true` if it was just created or `false` if it already existed (except on Postgres and SQLite, which can't detect this and will always return `null` instead of a boolean).
    */
   static async upsert(values, options) {
     options = {
@@ -2460,7 +2480,7 @@ class Model {
     const now = Utils.now(this.sequelize.options.dialect);
 
     // Attach createdAt
-    if (createdAtAttr && !updateValues[createdAtAttr]) {
+    if (createdAtAttr && !insertValues[createdAtAttr]) {
       const field = this.rawAttributes[createdAtAttr].field || createdAtAttr;
       insertValues[field] = this._getDefaultTimestamp(createdAtAttr) || now;
     }

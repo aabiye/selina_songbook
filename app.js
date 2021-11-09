@@ -1,11 +1,11 @@
 const express = require("express");
 const app = express();
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 //Boilerplate dependecies for oAuth
-const jwt = require('express-jwt');
-const jwks = require('jwks-rsa');
-const cors = require('cors');
+const jwt = require("express-jwt");
+const jwks = require("jwks-rsa");
+const cors = require("cors");
 
 const port = process.env.PORT || 8080;
 
@@ -23,71 +23,70 @@ const port = process.env.PORT || 8080;
 
 // app.use(jwtCheck);
 
-app.get('/authorized', function (req, res) {
-    res.send('Secured Resource');
+app.get("/authorized", function (req, res) {
+  res.send("Secured Resource");
 });
 
 app.listen(port);
 
-const {User, Item} = require('./models');
+const { User, Song } = require("./models");
 
 // initialise Express
-
 
 // specify out request bodies are json
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('<h1>Selina!!!!</h1>')
-})
+app.get("/", (req, res) => {
+  res.send("<h1>Selina!!!!</h1>");
+});
 
-app.get('/users', async (req, res) => {
+app.get("/users", async (req, res) => {
   //what should i put here?
-  let users = await User.findAll()
-  res.json({users});
-})
+  let users = await User.findAll();
+  res.json({ users });
+});
 
-app.get('/users/:id', async (req, res) => {
+app.get("/users/:id", async (req, res) => {
   let user = await User.findByPk(req.params.id);
-  res.json({user});
-})
+  res.json({ user });
+});
 
-// I want to get all items
+// I want to get all songs
 
-app.get('/items', async(req, res)=> {
-  let items = await Item.findAll();
-  res.json({items});
-})
+app.get("/songs", async (req, res) => {
+  let songs = await Song.findAll();
+  res.json({ songs });
+});
 
-// I want to get one item
+// I want to get one song
 
-app.get('/items/:id', async(req, res)=> {
-  let item = await Item.findByPk(req.params.id);
-  res.json({item});
-})
+app.get("/songs/:id", async (req, res) => {
+  let song = await Song.findByPk(req.params.id);
+  res.json({ song });
+});
 
-// I want to delete one item
+// I want to delete one song
 
-app.delete('/items/:id', async(req, res)=> {
-  await Item.destroy({where: {id: req.params.id}});
-  res.send('Deleted!')
-})
+app.delete("/songs/:id", async (req, res) => {
+  await Song.destroy({ where: { id: req.params.id } });
+  res.send("Deleted!");
+});
 
-// I want to create one item
+// I want to create one song
 
-app.post('/items', async(req, res)=> {
-  let newItem = await Item.create(req.body);
-  res.json({newItem})
-})
+app.post("/songs", async (req, res) => {
+  let newSong = await Song.create(req.body);
+  res.json({ newSong });
+});
 
-// I want to update one item
+// I want to update one song
 
-app.put('/items/:id', async(req, res)=> {
-  let updatedItem = await Item.update(req.body, {
-    where : {id : req.params.id}
+app.put("/songs/:id", async (req, res) => {
+  let updatedSong = await Song.update(req.body, {
+    where: { id: req.params.id },
   });
-  res.json({updatedItem})
-})
+  res.json({ updatedSong });
+});
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");

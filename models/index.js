@@ -1,25 +1,30 @@
-const {Sequelize, DataTypes, Model} = require('sequelize')
-const {sequelize} = require('../db')
-
+const { Sequelize, DataTypes, Model } = require("sequelize");
+const { sequelize } = require("../db");
 
 class User extends Model {}
 
-class Item extends Model {}
+class Song extends Model {}
 
-User.init({
+User.init(
+  {
     name: DataTypes.STRING,
     password: DataTypes.STRING,
-}, {
+  },
+  {
     sequelize,
     timestamps: false,
-});
+  }
+);
 
-
-Item.init({
-    name: DataTypes.STRING
-}, {
+Song.init(
+  {
+    name: DataTypes.STRING,
+    year: DataTypes.FLOAT
+  },
+  {
     sequelize,
     timestamps: false,
-});
+  }
+);
 
-module.exports = {User, Item};
+module.exports = { User, Song };

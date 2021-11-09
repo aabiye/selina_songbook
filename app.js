@@ -8,7 +8,7 @@ const cors = require('cors');
 
 const port = process.env.PORT || 8080;
 
-var jwtCheck = jwt({
+const jwtCheck = jwt({
       secret: jwks.expressJwtSecret({
           cache: true,
           rateLimit: true,

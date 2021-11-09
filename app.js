@@ -1,4 +1,5 @@
 const express = require("express");
+const app = express();
 const bcrypt = require('bcrypt');
 
 //Boilerplate dependecies for oAuth
@@ -8,19 +9,19 @@ const cors = require('cors');
 
 const port = process.env.PORT || 8080;
 
-const jwtCheck = jwt({
-      secret: jwks.expressJwtSecret({
-          cache: true,
-          rateLimit: true,
-          jwksRequestsPerMinute: 5,
-          jwksUri: 'https://dev-26-ppi9m.us.auth0.com/.well-known/jwks.json'
-    }),
-    audience: 'selinaSongbook ',
-    issuer: 'https://dev-26-ppi9m.us.auth0.com/',
-    algorithms: ['RS256']
-});
+// const jwtCheck = jwt({
+//       secret: jwks.expressJwtSecret({
+//           cache: true,
+//           rateLimit: true,
+//           jwksRequestsPerMinute: 5,
+//           jwksUri: 'https://dev-26-ppi9m.us.auth0.com/.well-known/jwks.json'
+//     }),
+//     audience: 'selinaSongbook ',
+//     issuer: 'https://dev-26-ppi9m.us.auth0.com/',
+//     algorithms: ['RS256']
+// });
 
-app.use(jwtCheck);
+// app.use(jwtCheck);
 
 app.get('/authorized', function (req, res) {
     res.send('Secured Resource');
@@ -31,7 +32,7 @@ app.listen(port);
 const {User, Item} = require('./models');
 
 // initialise Express
-const app = express();
+
 
 // specify out request bodies are json
 app.use(express.json());

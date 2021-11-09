@@ -1,6 +1,32 @@
 const express = require("express");
-const basicAuth = require('express-basic-auth');
 const bcrypt = require('bcrypt');
+
+//Boilerplate dependecies for oAuth
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
+const cors 
+
+const port = process.env.PORT || 8080;
+
+var jwtCheck = jwt({
+      secret: jwks.expressJwtSecret({
+          cache: true,
+          rateLimit: true,
+          jwksRequestsPerMinute: 5,
+          jwksUri: 'https://dev-26-ppi9m.us.auth0.com/.well-known/jwks.json'
+    }),
+    audience: 'selinaSongbook ',
+    issuer: 'https://dev-26-ppi9m.us.auth0.com/',
+    algorithms: ['RS256']
+});
+
+app.use(jwtCheck);
+
+app.get('/authorized', function (req, res) {
+    res.send('Secured Resource');
+});
+
+app.listen(port);
 
 const {User, Item} = require('./models');
 

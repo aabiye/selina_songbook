@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 //Boilerplate dependecies for oAuth
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
-const cors 
+const cors = require('cors');
 
 const port = process.env.PORT || 8080;
 

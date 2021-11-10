@@ -14,10 +14,10 @@ const jwtCheck = jwt({
           cache: true,
           rateLimit: true,
           jwksRequestsPerMinute: 5,
-          jwksUri: 'https://dev-26-ppi9m.us.auth0.com/.well-known/jwks.json'
+          jwksUri: 'https://dev-aszlcuc8.us.auth0.com/.well-known/jwks.json'
     }),
-    audience: 'selinaSongbook ',
-    issuer: 'https://dev-26-ppi9m.us.auth0.com/oauth/token',
+    audience: 'SongsAPI',
+    issuer: 'https://dev-aszlcuc8.us.auth0.com/',
     algorithms: ['RS256']
 });
 

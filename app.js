@@ -9,17 +9,17 @@ const cors = require("cors");
 
 const port = process.env.PORT || 8080;
 
-// const jwtCheck = jwt({
-//       secret: jwks.expressJwtSecret({
-//           cache: true,
-//           rateLimit: true,
-//           jwksRequestsPerMinute: 5,
-//           jwksUri: 'https://dev-26-ppi9m.us.auth0.com/.well-known/jwks.json'
-//     }),
-//     audience: 'selinaSongbook ',
-//     issuer: 'https://dev-26-ppi9m.us.auth0.com/',
-//     algorithms: ['RS256']
-// });
+const jwtCheck = jwt({
+      secret: jwks.expressJwtSecret({
+          cache: true,
+          rateLimit: true,
+          jwksRequestsPerMinute: 5,
+          jwksUri: 'https://dev-26-ppi9m.us.auth0.com/.well-known/jwks.json'
+    }),
+    audience: 'selinaSongbook ',
+    issuer: 'https://dev-26-ppi9m.us.auth0.com/oauth/token',
+    algorithms: ['RS256']
+});
 
 // app.use(jwtCheck);
 
@@ -40,48 +40,48 @@ app.get("/", (req, res) => {
   res.send("<h1>Selina!!!!</h1>");
 });
 
-app.get("/users", async (req, res) => {
+app.get("/users",  async (req, res) => {
   //what should i put here?
   let users = await User.findAll();
   res.json({ users });
 });
 
-app.get("/users/:id", async (req, res) => {
+app.get("/users/:id", jwtCheck, async (req, res) => {
   let user = await User.findByPk(req.params.id);
   res.json({ user });
 });
 
 // I want to get all songs
 
-app.get("/songs", async (req, res) => {
+app.get("/songs", jwtCheck, async (req, res) => {
   let songs = await Song.findAll();
   res.json({ songs });
 });
 
 // I want to get one song
 
-app.get("/songs/:id", async (req, res) => {
+app.get("/songs/:id", jwtCheck, async (req, res) => {
   let song = await Song.findByPk(req.params.id);
   res.json({ song });
 });
 
 // I want to delete one song
 
-app.delete("/songs/:id", async (req, res) => {
+app.delete("/songs/:id", jwtCheck, async (req, res) => {
   await Song.destroy({ where: { id: req.params.id } });
   res.send("Deleted!");
 });
 
 // I want to create one song
 
-app.post("/songs", async (req, res) => {
+app.post("/songs", jwtCheck, async (req, res) => {
   let newSong = await Song.create(req.body);
   res.json({ newSong });
 });
 
 // I want to update one song
 
-app.put("/songs/:id", async (req, res) => {
+app.put("/songs/:id", jwtCheck, async (req, res) => {
   let updatedSong = await Song.update(req.body, {
     where: { id: req.params.id },
   });

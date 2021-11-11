@@ -1,0 +1,429 @@
+/* START HOME-------------------------------------------------------------------------  */
+
+.headerContainer {
+  width: auto;
+  margin-left: 50px;
+}
+
+.headerContainer h1 {
+  justify-content: center;
+  align-items: center;
+  font-size: 70px;
+  height: 60px;
+  font-weight: 50;
+  color: black;
+  margin-top: 0px;
+}
+
+.headerContainer button {
+  margin-top: 200px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: center;
+  background-color: black;
+  height: 50px;
+  width: 180px;
+  color: white;
+  font-size: 20px;
+}
+.bkimage {
+  width: 120%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hometitle {
+  font-family: "source_serif_proregular", serif;
+  font-size: 35px;
+}
+
+@media only screen and (max-width: 650px) {
+  .home {
+    justify-content: center;
+    align-items: center;
+  }
+}
+/* END HOME ------------------------------------------------------------------------- */
+/* START CARDS ------------------------------------------------------------------------- */
+
+.card {
+  margin: 2rem 2rem 2rem 0;
+  padding: 1.5rem;
+  width: 250px;
+  box-shadow: 0 0 28px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+P {
+  font-family: "source_serif_proregular", serif;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.card__title {
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  width: 99%;
+  border: 0.5px solid grey;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.9rem;
+  margin: 0 auto;
+}
+
+.memberstitle {
+  text-align: center;
+  font-family: "source_serif_proregular", serif;
+}
+
+/* END CARDS ------------------------------------------------------------------------- */
+
+/* START CONTACT US ------------------------------------------------------------------------- */
+
+.contact {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+}
+
+.contact .leftSide {
+  height: 100%;
+  flex: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.contact .rightSide {
+  height: 100%;
+  flex: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact .rightSide h1 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-weight: 10;
+  font-size: 50px;
+  margin-left: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  padding: 30px;
+}
+
+form input {
+  height: 40px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid #121619;
+  color: black;
+}
+
+form textarea {
+  margin-top: 15px;
+  height: 70px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid #121619;
+  color: black;
+}
+input::placeholder,
+textarea::placeholder {
+  font-weight: bold;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+form input:focus,
+textarea:focus {
+  outline: none;
+}
+
+form label {
+  margin-top: 15px;
+  color: grey;
+}
+
+form button {
+  margin-top: 40px;
+  width: 140px;
+  height: 40px;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+/* END CONTACT US ------------------------------------------------------------------------- */
+
+/* START ABOUT US ------------------------------------------------------------------------- */
+
+.about {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.aboutTop {
+  width: 100%;
+  height: 45%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "source_serif_proregular", serif;
+}
+
+.aboutBottom {
+  display: flex;
+  flex-direction: column;
+  height: 55%;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.aboutBottom p {
+  width: 1200px;
+}
+
+.about .aboutBottom h1 {
+  font-weight: 400;
+  font-size: 45px;
+  color: black;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  transform: translateY(-40px);
+}
+/* END ABOUT US ------------------------------------------------------------------------- */
+/* START HEADER ------------------------------------------------------------------------- */
+
+.logoimage {
+  width: 150%;
+  height: 40px;
+}
+
+.navbar {
+  width: 100%;
+  height: 100px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+#lname {
+  font-family: "Lucida Handwriting";
+  color: black;
+  font-size: 35px;
+}
+.navbar .rightSide {
+  flex: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.navbar a {
+  color: black;
+  text-decoration: none;
+  margin: 20px;
+}
+
+.navbar .rightSide button {
+  background-color: transparent;
+  border: none;
+  color: black;
+  cursor: pointer;
+}
+
+.navbar .rightSide svg {
+  font-size: 40px;
+}
+
+.navbar #open {
+  padding-left: 0px;
+}
+.navbar #open img {
+  display: none;
+}
+
+.navbar #close img {
+  display: inherit;
+}
+
+.navbar #open .hiddenLinks {
+  display: inherit;
+  margin-left: 30px;
+}
+
+.navbar #close .hiddenLinks {
+  display: none;
+}
+
+.navbar #open a {
+  width: 70px;
+  margin: 5px;
+}
+@media only screen and (max-width: 900px) {
+  .navbar .rightSide a {
+    width: 70px;
+  }
+  .navbar .leftSide {
+    padding-left: 50px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .navbar .rightSide a {
+    display: none;
+  }
+
+  .navbar .rightSide {
+    justify-content: flex-end;
+    padding-right: 50px;
+  }
+
+  .navbar .rightSide button {
+    display: inherit;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .navbar .rightSide button {
+    display: none;
+  }
+
+  .hiddenLinks {
+    display: none;
+  }
+}
+
+/* END HEADER ------------------------------------------------------------------------- */
+/* START FOOTER -------------------------------------------------------- */
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 15px;
+  background-color: white;
+  justify-content: center;
+  color: black;
+}
+
+.footer-left {
+  display: flex;
+  width: 25%;
+  justify-content: center;
+}
+
+.footer-center {
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
+}
+
+.footer-right {
+  display: flex;
+  width: 25%;
+  justify-content: center;
+}
+
+.footer-item {
+  margin: 10px;
+}
+
+.footer-item a {
+  text-decoration: none;
+  color: black;
+}
+
+.footer-item h4 {
+  color: black;
+  font-family: "source_serif_proregular", serif;
+}
+
+.footer-item li {
+  list-style-type: none;
+  margin-top: 10px;
+}
+
+.footer-item ul {
+  margin: 0;
+  padding: 0;
+}
+
+.footer-item a:hover {
+  color: black;
+}
+
+/* END FOOTER -------------------------------------------------------- */
+/* START CARDS ------------------------------------------------------------------------- */
+
+.card {
+  margin: 2rem 2rem 2rem 0;
+  padding: 1.5rem;
+  width: 250px;
+  box-shadow: 0 0 28px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+P {
+  font-family: "source_serif_proregular", serif;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.card__title {
+  font-weight: 800;
+  font-size: 1.5rem;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  width: 99%;
+  border: 0.5px solid grey;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.9rem;
+  margin: 0 auto;
+}
+
+.memberstitle {
+  text-align: center;
+  font-family: "source_serif_proregular", serif;
+}
+
+/* END CARDS ------------------------------------------------------------------------- */

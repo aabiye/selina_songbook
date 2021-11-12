@@ -5,8 +5,6 @@ class User extends Model {}
 
 class Song extends Model {}
 
-class PublicSong extends Model {}
-
 User.init(
   {
     name: DataTypes.STRING,
@@ -23,7 +21,6 @@ Song.init(
     name: DataTypes.STRING,
     year: DataTypes.FLOAT,
     image: DataTypes.STRING,
-    fan: DataTypes.FLOAT,
   },
   {
     sequelize,
@@ -31,15 +28,4 @@ Song.init(
   }
 );
 
-PublicSong.init(
-  {
-    name: DataTypes.STRING,
-    year: DataTypes.FLOAT
-  },
-  {
-    sequelize,
-    timestamps: false,
-  }
-);
-
-module.exports = { User, Song, PublicSong };
+module.exports = { User, Song };

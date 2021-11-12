@@ -18,7 +18,7 @@ function Header() {
        <span></span>
       <div className="rightSide" id={openLinks ? "open" : "close"}>
         <Link to="/"> Home </Link>
-        <Link to="/songs"> Songs </Link>
+        <Link to="/login"> Login </Link>
         <Link to="/about"> About </Link>
         <Link to="/contact"> Contact </Link>
         <button onClick={toggleNavbar}>

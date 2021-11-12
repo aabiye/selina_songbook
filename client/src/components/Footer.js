@@ -8,7 +8,7 @@ function Footer() {
       <footer className="footer">
         <div className="footer-left">
           <div className="footer-item">
-            <h4>Selina Productions</h4>
+            <h4>SELINAS PRODUCTION</h4>
             <ul role="list">
               <li>
                 <span> Corpus Christi, TX </span>

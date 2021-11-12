@@ -29,7 +29,7 @@ app.get("/authorized", function (req, res) {
 
 app.listen(port);
 
-const { User, Song } = require("./models");
+const { User, Song, PublicSong } = require("./models");
 
 // initialise Express
 
@@ -46,11 +46,17 @@ app.get("/users", async (req, res) => {
   res.json({ users });
 });
 
-app.get("/users/:id", jwtCheck, async (req, res) => {
+app.get("/users/:id", async (req, res) => {
   let user = await User.findByPk(req.params.id);
   res.json({ user });
 });
 
+// I want to get all songs
+
+app.get("/publicsongs", async (req, res) => {
+  let publicSongs = await PublicSong.findAll();
+  res.json({ publicSongs });
+});
 // I want to get all songs
 
 app.get("/songs", async (req, res) => {
@@ -60,28 +66,28 @@ app.get("/songs", async (req, res) => {
 
 // I want to get one song
 
-app.get("/songs/:id", jwtCheck, async (req, res) => {
+app.get("/songs/:id", async (req, res) => {
   let song = await Song.findByPk(req.params.id);
   res.json({ song });
 });
 
 // I want to delete one song
 
-app.delete("/songs/:id", jwtCheck, async (req, res) => {
+app.delete("/songs/:id", async (req, res) => {
   await Song.destroy({ where: { id: req.params.id } });
   res.send("Deleted!");
 });
 
 // I want to create one song
 
-app.post("/songs", jwtCheck, async (req, res) => {
+app.post("/songs", async (req, res) => {
   let newSong = await Song.create(req.body);
   res.json({ newSong });
 });
 
 // I want to update one song
 
-app.put("/songs/:id", jwtCheck, async (req, res) => {
+app.put("/songs/:id", async (req, res) => {
   let updatedSong = await Song.update(req.body, {
     where: { id: req.params.id },
   });

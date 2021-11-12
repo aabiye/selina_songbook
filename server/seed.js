@@ -3,7 +3,7 @@ const fs = require("fs").promises;
 // const bcrypt = require("bcrypt");
 
 const { sequelize } = require("./db");
-const { User, Song } = require("./models");
+const { User, Song, PublicSong } = require("./models");
 
 const createUsers = async () => {
   const users = [
@@ -16,11 +16,21 @@ const createUsers = async () => {
 };
 
 const songs = [
-  { name: "Bidi Bidi Bom Bom", year: 1994 },
-  { name: "Amor Prohibido", year: 1994 },
-  { name: "Como La Flor", year: 1992 },
-  { name: "Si Una Vez", year: 1994 },
-  { name: "La Carcacha", year: 1992 },
+  { name: " Bom Bom", year: 1994 , fan: 25, image: "http://krui.fm/wordpress/wp-content/uploads/2017/09/selena-quintanilla-perez.jpg"},
+  { name: "Amor Prohibido", year: 1994, fan: 25,image: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/selena-murder-1607110158.jpg?crop=0.502xw:1.00xh;0.236xw,0&resize=640:*"},
+  { name: "Como La Flor", year: 1992 ,fan: 25,image: "http://images2.fanpop.com/image/photos/11100000/Selena-selena-quintanilla-perez-11166450-636-800.jpg" },
+  { name: "Si Una Vez", year: 1994 , fan: 25,image: "https://www.gannett-cdn.com/presto/2020/02/20/PCCT/34fc4731-2b93-4941-8d09-93d255cc0d4a-QuintanillaPerezSelena.jpg"},
+  { name: "La Carcacha", year: 1992, fan: 25,image: "https://www.notablebiographies.com/images/uewb_09_img0638.jpg" },
+  { name: "Ven Conmigo", year: 1992, fan: 25,image: "https://i2.wp.com/geeksofcolor.co/wp-content/uploads/2018/04/img_0978-1.jpg?resize=1140%2C1143&ssl=1" }
+];
+
+const publicSongs = [
+  { name: "Bidi Bidi Bom Bom", year: 1994 , image: "http://krui.fm/wordpress/wp-content/uploads/2017/09/selena-quintanilla-perez.jpg"},
+  { name: "Amor Prohibido", year: 1994, image: "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/selena-murder-1607110158.jpg?crop=0.502xw:1.00xh;0.236xw,0&resize=640:*"},
+  { name: "Como La Flor", year: 1992 ,image: "http://images2.fanpop.com/image/photos/11100000/Selena-selena-quintanilla-perez-11166450-636-800.jpg" },
+  { name: "Si Una Vez", year: 1994 , image: "https://www.gannett-cdn.com/presto/2020/02/20/PCCT/34fc4731-2b93-4941-8d09-93d255cc0d4a-QuintanillaPerezSelena.jpg"},
+  { name: "La Carcacha", year: 1992, image: "https://www.notablebiographies.com/images/uewb_09_img0638.jpg" },
+  { name: "Ven Conmigo", year: 1992, image: "https://i2.wp.com/geeksofcolor.co/wp-content/uploads/2018/04/img_0978-1.jpg?resize=1140%2C1143&ssl=1" }
 ];
 
 const seed = async () => {
@@ -30,7 +40,8 @@ const seed = async () => {
 
   const userPromises = users.map((user) => User.create(user));
   const songPromises = songs.map((song) => Song.create(song));
-  await Promise.all([...userPromises, ...songPromises]);
+  const publicSongPromises = publicSongs.map((song) => PublicSong.create(song));
+  await Promise.all([...userPromises, ...songPromises, ...publicSongPromises]);
   console.log("db populated!");
 };
 

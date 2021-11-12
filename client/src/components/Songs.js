@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "../App.css";
 
 function Songs() {
   const [songs, getSongs] = useState([]);
@@ -20,15 +21,21 @@ function Songs() {
 
   return (
     <>
-      <div className="cards-container"></div>
-      {songs.map((song, index) => (
-        <div className="card">
-          <div key={song.id}>
-            <p className="card__title">{song.name}</p>
-            <p className="card_text">{song.year}</p>
-          </div>
+      <div className="App">
+        <h1 className="memberstitle">SELINA'S SONGBOOK</h1>
+        <br />
+        <div className="cards-container">
+          {songs.map((song, index) => (
+            <div className="card">
+              <div key={song.id}>
+                <img className="song-img" src={song.image} />
+                <p className="card__title">{song.name}</p>
+                <p className="card_text">{song.year}</p>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </>
   );
 }

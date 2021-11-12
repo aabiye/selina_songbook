@@ -12,8 +12,11 @@ function Home() {
           <br />
           Queen of Tejano Music
         </h2>
-        <Link to="/member">
+        {/* <Link to="/song">
           <button> SONGS </button>
+        </Link> */}
+        <Link to="/login">
+          <button> LOGIN </button>
         </Link>
         <br />
         <br />
